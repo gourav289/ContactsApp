@@ -1,0 +1,42 @@
+[
+  {
+    "first_name": "Gourav",
+    "last_name": "Kumar",
+    "phone_number": "+91 7837234329"
+  },
+  {
+    "first_name": "Hunny",
+    "last_name": "Goyal",
+    "phone_number": "+91 9877976604"
+  },
+  {
+    "first_name": "John",
+    "last_name": "Doe",
+    "phone_number": "+91 956977221"
+  },
+  {
+    "first_name": "James",
+    "last_name": "Smith",
+    "phone_number": "+91 9988923330"
+  },
+  {
+    "first_name": "Michael",
+    "last_name": "Smith",
+    "phone_number": "+91 7696269055"
+  },
+  {
+    "first_name": "David",
+    "last_name": "Johson",
+    "phone_number": "+91 7888852428"
+  },
+  {
+    "first_name": "Steve",
+    "last_name": "Clark",
+    "phone_number": "+91 1234567890"
+  },
+  {
+    "first_name": "Mary",
+    "last_name": "Williams",
+    "phone_number": "+91 0987654321"
+  }
+]
