@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">ContactsApp</string>
+    <string name="app_name">Contacts App</string>
     <string name="send">Send</string>
     <string name="otp_message">Hi, Your OTP is:</string>
     <string name="compose_message">Compose Message</string>
     <string name="otp">OTP</string>
+    <string name="enter_message">Please Enter Message</string>
 </resources>

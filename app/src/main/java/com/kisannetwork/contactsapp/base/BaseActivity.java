@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.kisannetwork.contactsapp.utils.ToastUtils;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -17,8 +19,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if(setLayout()!=0)
             setContentView(setLayout());
-
         binder= ButterKnife.bind(this);
+    }
+
+    public void showToast(String message){
+        ToastUtils.showToast(this,message);
     }
 
     @Override

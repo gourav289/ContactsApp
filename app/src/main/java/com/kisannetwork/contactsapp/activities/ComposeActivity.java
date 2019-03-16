@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,10 +73,15 @@ public class ComposeActivity extends BaseActivity {
 
     @OnClick(R.id.btn_send)
     void onSendClick(){
-        long currentTime= System.currentTimeMillis();
-        SimpleDateFormat sf=new SimpleDateFormat("hh:mm a");
-        String time=sf.format(currentTime);
-        SentMessagesModel sentMessagesModel=new SentMessagesModel(mContactsModel.getFirstName(),mContactsModel.getLastName(),otp,edMessage.getText().toString().trim(),currentTime,time);
-        sentMessagesViewModel.insert(sentMessagesModel);
+        String message=edMessage.getText().toString().trim();
+        if(!TextUtils.isEmpty(message)) {
+            long currentTime = System.currentTimeMillis();
+            SimpleDateFormat sf = new SimpleDateFormat("hh:mm a");
+            String time = sf.format(currentTime);
+            SentMessagesModel sentMessagesModel = new SentMessagesModel(mContactsModel.getFirstName(), mContactsModel.getLastName(), otp, message, currentTime, time);
+            sentMessagesViewModel.insert(sentMessagesModel);
+        }else{
+            showToast(getString(R.string.enter_message));
+        }
     }
 }
