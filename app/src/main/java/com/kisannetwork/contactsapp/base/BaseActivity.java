@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.kisannetwork.contactsapp.utils.MyProgressDialog;
 import com.kisannetwork.contactsapp.utils.ToastUtils;
 
 import butterknife.ButterKnife;
@@ -22,8 +23,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         binder= ButterKnife.bind(this);
     }
 
-    public void showToast(String message){
+    protected void showToast(String message){
         ToastUtils.showToast(this,message);
+    }
+
+    protected void showProgress(){
+        MyProgressDialog.show(this);
+    }
+
+    protected void hideProgress(){
+        MyProgressDialog.hide();
     }
 
     @Override

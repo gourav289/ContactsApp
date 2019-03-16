@@ -18,10 +18,18 @@ import com.kisannetwork.contactsapp.room.SentMessagesViewModel;
 import com.kisannetwork.contactsapp.utils.CommonMethods;
 import com.kisannetwork.contactsapp.utils.Constants;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ComposeActivity extends BaseActivity {
 
@@ -32,6 +40,7 @@ public class ComposeActivity extends BaseActivity {
 
     private  String otp="";
     private ContactsModel mContactsModel;
+    String message="";
 
     private SentMessagesViewModel sentMessagesViewModel;
 
@@ -73,15 +82,63 @@ public class ComposeActivity extends BaseActivity {
 
     @OnClick(R.id.btn_send)
     void onSendClick(){
-        String message=edMessage.getText().toString().trim();
+        message=edMessage.getText().toString().trim();
         if(!TextUtils.isEmpty(message)) {
-            long currentTime = System.currentTimeMillis();
+            showProgress();
+            final long currentTime = System.currentTimeMillis();
             SimpleDateFormat sf = new SimpleDateFormat("hh:mm a");
-            String time = sf.format(currentTime);
-            SentMessagesModel sentMessagesModel = new SentMessagesModel(mContactsModel.getFirstName(), mContactsModel.getLastName(), otp, message, currentTime, time);
-            sentMessagesViewModel.insert(sentMessagesModel);
+            final String time = sf.format(currentTime);
+            try {
+                post(Constants.SMS_URL, new  Callback(){
+
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showToast("Failure");
+                            }
+                        });
+                        hideProgress();
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        hideProgress();
+                        SentMessagesModel sentMessagesModel = new SentMessagesModel(mContactsModel.getFirstName(), mContactsModel.getLastName(), otp, message, currentTime, time);
+                        sentMessagesViewModel.insert(sentMessagesModel);
+                        finish();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showToast("SMS Sent");
+                            }
+                        });
+                    }
+                });
+            } catch (IOException e) {
+                hideProgress();
+                e.printStackTrace();
+            }
         }else{
             showToast(getString(R.string.enter_message));
         }
+    }
+
+    //Call to SMS API
+    Call post(String url, Callback callback) throws IOException {
+        RequestBody formBody = new FormBody.Builder()
+                .add("To", mContactsModel.getPhoneNumber())
+                .add("Body", message)
+                .build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(formBody)
+                .build();
+        OkHttpClient mClient = new OkHttpClient();
+        Call response = mClient.newCall(request);
+        response.enqueue(callback);
+        return response;
     }
 }
