@@ -21,11 +21,11 @@ import butterknife.BindView;
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
-    private Toolbar toolbar;
+    Toolbar toolbar;
     @BindView(R.id.tabs)
-    private TabLayout tabLayout;
+    TabLayout tabLayout;
     @BindView(R.id.viewpager)
-    private ViewPager viewPager;
+    ViewPager viewPager;
 
     @Override
     public int setLayout() {
@@ -38,7 +38,6 @@ public class MainActivity extends BaseActivity {
 
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setupViewPager(viewPager);
 
