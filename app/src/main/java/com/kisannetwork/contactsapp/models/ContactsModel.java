@@ -17,15 +17,11 @@ public class ContactsModel implements Parcelable {
     @SerializedName("phone_number")
     private String phoneNumber;
 
-    private int colorCode;
-    private String shortName;
 
     protected ContactsModel(Parcel in) {
         firstName = in.readString();
         lastName = in.readString();
         phoneNumber = in.readString();
-        colorCode = in.readInt();
-        shortName = in.readString();
     }
 
     public static final Creator<ContactsModel> CREATOR = new Creator<ContactsModel>() {
@@ -40,21 +36,7 @@ public class ContactsModel implements Parcelable {
         }
     };
 
-    public String getShortName() {
-        return CommonMethods.getNameChars(getFirstName(),getLastName());
-    }
 
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-
-    public int getColorCode() {
-        return CommonMethods.getRandomColor();
-    }
-
-    public void setColorCode(int colorCode) {
-        this.colorCode = colorCode;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -90,7 +72,5 @@ public class ContactsModel implements Parcelable {
         dest.writeString(firstName);
         dest.writeString(lastName);
         dest.writeString(phoneNumber);
-        dest.writeInt(colorCode);
-        dest.writeString(shortName);
     }
 }

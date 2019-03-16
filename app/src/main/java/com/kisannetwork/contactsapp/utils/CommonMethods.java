@@ -27,7 +27,7 @@ public class CommonMethods {
         return String.format("%06d", number);
     }
 
-    public static String getNameChars(String firstName,String lastName){
+    public static String getShortName(String firstName,String lastName){
         String name="";
         if(firstName.length()>0)
             name+=firstName.charAt(0);

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.kisannetwork.contactsapp.R;
 import com.kisannetwork.contactsapp.models.ContactsModel;
+import com.kisannetwork.contactsapp.utils.CircularTextView;
+import com.kisannetwork.contactsapp.utils.CommonMethods;
 
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         @BindView(R.id.txt_name)
         TextView txtName;
         @BindView(R.id.txt_short_name)
-        TextView txtShortName;
+        CircularTextView txtShortName;
         @BindView(R.id.lin_main)
         LinearLayout linMain;
         public ContactsViewHolder(@NonNull View itemView) {
@@ -64,8 +66,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
         public void setData(ContactsModel mContactsModel){
             txtName.setText(mContactsModel.getFirstName()+" "+mContactsModel.getLastName());
-            txtShortName.setText(mContactsModel.getShortName());
-            txtShortName.setBackgroundColor(mContactsModel.getColorCode());
+            txtShortName.setText(CommonMethods.getShortName(mContactsModel.getFirstName(),mContactsModel.getLastName()));
+            txtShortName.setSolidColor(CommonMethods.getRandomColor());
         }
 
         public void setListener(final int position){

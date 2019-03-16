@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.kisannetwork.contactsapp.R;
 import com.kisannetwork.contactsapp.base.BaseActivity;
 import com.kisannetwork.contactsapp.models.ContactsModel;
+import com.kisannetwork.contactsapp.utils.CircularTextView;
+import com.kisannetwork.contactsapp.utils.CommonMethods;
 import com.kisannetwork.contactsapp.utils.Constants;
 
 import butterknife.BindView;
@@ -20,7 +22,7 @@ public class ContactDetailsActivity extends BaseActivity {
     @BindView(R.id.lin_top)
     FrameLayout linTop;
     @BindView(R.id.txt_short_name)
-    TextView txtShortName;
+    CircularTextView txtShortName;
     @BindView(R.id.txt_name)
     TextView txtName;
     @BindView(R.id.txt_phone)
@@ -46,9 +48,10 @@ public class ContactDetailsActivity extends BaseActivity {
     }
 
     private void setData(ContactsModel mContactsModel){
-        txtShortName.setText(mContactsModel.getShortName());
-        txtShortName.setBackgroundColor(mContactsModel.getColorCode());
-        linTop.setBackgroundColor(mContactsModel.getColorCode());
+        int bgColor=CommonMethods.getRandomColor();
+        txtShortName.setText(CommonMethods.getShortName(mContactsModel.getFirstName(),mContactsModel.getLastName()));
+        txtShortName.setSolidColor(bgColor);
+        linTop.setBackgroundColor(bgColor);
         txtName.setText(mContactsModel.getFirstName()+" "+mContactsModel.getLastName());
         txtPhone.setText(mContactsModel.getPhoneNumber());
     }

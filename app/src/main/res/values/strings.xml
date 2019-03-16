@@ -3,4 +3,5 @@
     <string name="send">Send</string>
     <string name="otp_message">Hi, Your OTP is:</string>
     <string name="compose_message">Compose Message</string>
+    <string name="otp">OTP</string>
 </resources>
